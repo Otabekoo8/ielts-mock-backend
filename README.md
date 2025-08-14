@@ -1,43 +1,43 @@
-# IELTS Mock Imtihoni — Backend (Express + MongoDB)
+# IELTS Mock Mini - Backend
 
-## Ishga tushirish
-1) `cp .env.example .env` va qiymatlarni to'ldiring
-2) `npm install`
-3) `npm run dev` (yoki `npm start`)
+Bu loyiha **IELTS Mock Mini** platformasining backend qismi bo‘lib, foydalanuvchilarga IELTS testlarini onlayn topshirish imkonini beradi. Backend **Node.js** va **Express.js** asosida ishlab chiqilgan va **MongoDB** bilan bog‘langan. Deploy Render platformasida amalga oshirilgan.
 
-## API
-Base URL: `http://localhost:4000`
+## 🌐 Live Link
 
-### Foydalanuvchi
-- **GET /health**
-- **GET /api/test?limit=30**
-  - Tasodifiy savollarni qaytaradi (max 50).
-  - Response:
-    ```json
-    [
-      {"_id":"...","text":"...","options":["A","B","C","D"],"correctAnswerIndex":2}
-    ]
-    ```
+- **Backend:** [Render Link](https://ielts-mock-backend-b2je.onrender.com)
 
-### Admin (Authorization: `Bearer <ADMIN_TOKEN>`)
-- **GET /api/questions**
-- **POST /api/questions**
-  - Body:
-    ```json
-    {"text":"Savol?","options":["A","B","C","D"],"correctAnswerIndex":1}
-    ```
-- **PUT /api/questions/:id**
-- **DELETE /api/questions/:id**
+## 🛠 Technologies Used
 
-## CURL misollar
-```bash
-# Test savollarini olish
-curl http://localhost:4000/api/test
+- **Node.js** – Server platformasi  
+- **Express.js** – REST API yaratish uchun  
+- **MongoDB** – Ma’lumotlar bazasi  
+- **Mongoose** – MongoDB bilan ishlash uchun ORM  
+- **CORS** – Cross-origin requests uchun  
+- **dotenv** – Muhit o‘zgaruvchilarini o‘qish uchun  
 
-# Admin sifatida ro'yxat
-curl -H "Authorization: Bearer SUPER" http://localhost:4000/api/questions
+## 📂 Features
 
-# Admin yaratish
-curl -X POST http://localhost:4000/api/questions \
- -H "Authorization: Bearer SUPER" -H "Content-Type: application/json" \
- -d '{"text":"Capital of UK?","options":["Paris","London","Rome","Berlin"],"correctAnswerIndex":1}'
+- ✅ Admin panel orqali savol CRUD (qo‘shish, o‘qish, tahrirlash, o‘chirish)  
+- ✅ Testni boshlash  
+- ✅ Tasodifiy savollar  
+- ✅ Foydalanuvchi javoblarini tekshirish va yakuniy natija hisoblash  
+
+## 📌 API Endpoints
+
+**Admin**  
+- POST `/api/questions` — Savol qo‘shish  
+- GET `/api/questions` — Barcha savollarni olish  
+- PUT `/api/questions/:id` — Savolni tahrirlash  
+- DELETE `/api/questions/:id` — Savolni o‘chirish  
+
+**User**  
+- GET `/api/test` — Tasodifiy test savollarini olish  
+- POST `/api/test/result` — Test javoblarini yuborish va natija olish  
+
+## 🔗 Environment Variables
+
+Backend ishga tushishi uchun `.env` faylida quyidagi o‘zgaruvchilar bo‘lishi kerak:
+
+```env
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
+PORT=4000
